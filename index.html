@@ -4,47 +4,53 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="description" content="Pranesh Tambe — Quality Analyst and Business Analyst specializing in quality assurance, process analysis, data analytics and process improvement.">
-  <meta name="author" content="Pranesh Tambe">
+  <meta
+    name="description"
+    content="Pranesh Tambe | Business & Quality Analyst portfolio"
+  >
 
-  <meta property="og:title" content="Pranesh Tambe | Business & Quality Analyst">
-  <meta property="og:description" content="Quality Analyst and Business Analyst portfolio.">
-  <meta property="og:type" content="website">
+  <meta name="author" content="Pranesh Tambe">
 
   <title>Pranesh Tambe | Business & Quality Analyst</title>
 
+  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet"
   >
 
   <style>
 
     /* =========================================================
-       VARIABLES
+       DESIGN SYSTEM
     ========================================================= */
 
     :root {
-      --bg: #07090d;
-      --bg-soft: #0d1117;
+      --bg: #0b0c10;
+      --bg-secondary: #0d0f12;
 
-      --card: rgba(255,255,255,0.055);
-      --card-hover: rgba(255,255,255,0.085);
+      --glass: rgba(255, 255, 255, 0.05);
+      --glass-hover: rgba(255, 255, 255, 0.075);
 
-      --border: rgba(255,255,255,0.10);
+      --border: rgba(255, 255, 255, 0.10);
+      --border-hover: rgba(56, 189, 248, 0.30);
 
       --text: #f8fafc;
-      --muted: #94a3b8;
+      --text-secondary: #d1d5db;
+      --text-muted: #94a3b8;
 
-      --blue: #38bdf8;
-      --blue-soft: #7dd3fc;
-
+      --cyan: #38bdf8;
+      --cyan-light: #7dd3fc;
       --green: #4ade80;
 
-      --max: 1180px;
+      --max-width: 1180px;
+
+      --radius: 16px;
+
+      --transition: 0.3s ease;
     }
 
 
@@ -52,7 +58,9 @@
        RESET
     ========================================================= */
 
-    * {
+    *,
+    *::before,
+    *::after {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -66,26 +74,67 @@
 
 
     body {
-      font-family: "Inter", sans-serif;
+      min-height: 100vh;
 
       background:
         radial-gradient(
-          circle at 15% 10%,
-          rgba(56,189,248,0.10),
+          circle at 10% 10%,
+          rgba(56, 189, 248, 0.07),
           transparent 28%
         ),
         radial-gradient(
-          circle at 85% 65%,
-          rgba(56,189,248,0.06),
-          transparent 28%
+          circle at 90% 70%,
+          rgba(74, 222, 128, 0.035),
+          transparent 25%
         ),
         var(--bg);
 
       color: var(--text);
 
+      font-family: "Inter", sans-serif;
+
       line-height: 1.6;
 
       overflow-x: hidden;
+    }
+
+
+    body::before {
+      content: "";
+
+      position: fixed;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      background-image:
+        linear-gradient(
+          rgba(255,255,255,0.012) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,0.012) 1px,
+          transparent 1px
+        );
+
+      background-size: 80px 80px;
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          black,
+          transparent 80%
+        );
+
+      z-index: -1;
+    }
+
+
+    ::selection {
+      background: rgba(56, 189, 248, 0.25);
+      color: white;
     }
 
 
@@ -95,18 +144,52 @@
     }
 
 
-    button {
-      font-family: inherit;
+    img {
+      max-width: 100%;
     }
 
 
-    ::selection {
-      background: rgba(56,189,248,0.3);
+    button {
+      font: inherit;
     }
 
 
     /* =========================================================
-       NAVBAR
+       ACCESSIBILITY
+    ========================================================= */
+
+    .skip-link {
+      position: fixed;
+
+      left: 20px;
+      top: -100px;
+
+      z-index: 9999;
+
+      padding: 10px 16px;
+
+      border-radius: 8px;
+
+      background: var(--cyan);
+      color: #061018;
+
+      font-weight: 700;
+    }
+
+
+    .skip-link:focus {
+      top: 20px;
+    }
+
+
+    :focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 4px;
+    }
+
+
+    /* =========================================================
+       NAVIGATION
     ========================================================= */
 
     .navbar {
@@ -120,24 +203,25 @@
       z-index: 1000;
 
       background:
-        rgba(7,9,13,0.78);
+        rgba(13, 15, 18, 0.80);
 
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
 
       border-bottom:
-        1px solid rgba(255,255,255,0.06);
+        1px solid rgba(255, 255, 255, 0.06);
     }
 
 
-    .nav-inner {
-      max-width: var(--max);
+    .navbar-inner {
+      width: min(
+        var(--max-width),
+        calc(100% - 40px)
+      );
 
-      height: 74px;
+      min-height: 74px;
 
       margin: auto;
-
-      padding: 0 24px;
 
       display: flex;
 
@@ -148,16 +232,18 @@
 
 
     .logo {
-      font-size: 1.05rem;
+      font-size: 1.08rem;
 
       font-weight: 800;
 
-      letter-spacing: -0.5px;
+      letter-spacing: -0.3px;
+
+      white-space: nowrap;
     }
 
 
     .logo span {
-      color: var(--blue);
+      color: var(--cyan);
     }
 
 
@@ -166,20 +252,21 @@
 
       align-items: center;
 
-      gap: 30px;
+      gap: 26px;
 
       list-style: none;
     }
 
 
     .nav-links a {
-      color: var(--muted);
+      color: var(--text-muted);
 
       font-size: 0.82rem;
 
-      font-weight: 600;
+      font-weight: 500;
 
-      transition: 0.25s ease;
+      transition:
+        color var(--transition);
     }
 
 
@@ -188,22 +275,22 @@
     }
 
 
-    .nav-contact {
-      padding: 9px 17px;
+    .nav-cta {
+      padding: 8px 16px;
+
+      border:
+        1px solid rgba(56, 189, 248, 0.25);
 
       border-radius: 999px;
 
-      border:
-        1px solid rgba(56,189,248,0.3);
-
-      color: var(--blue) !important;
-
       background:
-        rgba(56,189,248,0.06);
+        rgba(56, 189, 248, 0.06);
+
+      color: var(--cyan) !important;
     }
 
 
-    .menu-btn {
+    .menu-toggle {
       display: none;
 
       width: 42px;
@@ -215,13 +302,11 @@
       border-radius: 9px;
 
       background:
-        rgba(255,255,255,0.04);
+        rgba(255, 255, 255, 0.04);
 
       color: white;
 
       cursor: pointer;
-
-      font-size: 20px;
     }
 
 
@@ -230,7 +315,10 @@
     ========================================================= */
 
     .container {
-      width: min(var(--max), calc(100% - 48px));
+      width: min(
+        var(--max-width),
+        calc(100% - 40px)
+      );
 
       margin: auto;
     }
@@ -241,18 +329,20 @@
     }
 
 
-    .section-heading {
-      text-align: center;
-
-      max-width: 650px;
+    .section-header {
+      max-width: 700px;
 
       margin:
         0 auto 50px;
+
+      text-align: center;
     }
 
 
-    .eyebrow {
-      color: var(--blue);
+    .section-label {
+      margin-bottom: 10px;
+
+      color: var(--cyan);
 
       font-size: 0.72rem;
 
@@ -261,59 +351,66 @@
       letter-spacing: 2.5px;
 
       text-transform: uppercase;
-
-      margin-bottom: 10px;
     }
 
 
-    .section-heading h2 {
-      font-size: clamp(1.8rem, 4vw, 2.5rem);
+    .section-title {
+      margin-bottom: 12px;
+
+      font-size:
+        clamp(1.8rem, 4vw, 2.5rem);
+
+      line-height: 1.2;
 
       letter-spacing: -1px;
-
-      margin-bottom: 12px;
     }
 
 
-    .section-heading p {
-      color: var(--muted);
+    .section-description {
+      color: var(--text-muted);
 
       font-size: 0.9rem;
     }
 
 
-    .glass {
+    /* =========================================================
+       GLASS CARDS
+    ========================================================= */
+
+    .glass-card {
       background:
         linear-gradient(
           145deg,
-          rgba(255,255,255,0.065),
-          rgba(255,255,255,0.025)
+          rgba(255, 255, 255, 0.065),
+          rgba(255, 255, 255, 0.025)
         );
+
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
 
       border:
         1px solid var(--border);
 
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-
-      border-radius: 18px;
+      border-radius: var(--radius);
 
       transition:
-        0.3s ease;
+        transform var(--transition),
+        border-color var(--transition),
+        box-shadow var(--transition),
+        background var(--transition);
     }
 
 
-    .glass:hover {
-      transform: translateY(-4px);
+    .glass-card:hover {
+      transform: translateY(-5px);
 
-      background:
-        var(--card-hover);
+      background: var(--glass-hover);
 
-      border-color:
-        rgba(56,189,248,0.18);
+      border-color: var(--border-hover);
 
       box-shadow:
-        0 20px 50px rgba(0,0,0,0.35);
+        0 18px 45px rgba(0, 0, 0, 0.38),
+        0 0 30px rgba(56, 189, 248, 0.035);
     }
 
 
@@ -337,7 +434,8 @@
       display: grid;
 
       grid-template-columns:
-        1.3fr 0.7fr;
+        minmax(0, 1.35fr)
+        minmax(280px, 0.65fr);
 
       gap: 70px;
 
@@ -345,29 +443,29 @@
     }
 
 
-    .availability {
+    .status-badge {
       display: inline-flex;
 
       align-items: center;
 
-      gap: 9px;
+      gap: 8px;
+
+      margin-bottom: 22px;
 
       padding:
         7px 13px;
 
-      margin-bottom: 22px;
-
       border-radius: 999px;
 
       background:
-        rgba(74,222,128,0.08);
+        rgba(74, 222, 128, 0.09);
 
       border:
-        1px solid rgba(74,222,128,0.18);
+        1px solid rgba(74, 222, 128, 0.18);
 
       color: var(--green);
 
-      font-size: 0.73rem;
+      font-size: 0.76rem;
 
       font-weight: 600;
     }
@@ -382,50 +480,44 @@
       background: var(--green);
 
       box-shadow:
-        0 0 12px rgba(74,222,128,0.8);
+        0 0 12px rgba(74, 222, 128, 0.8);
     }
 
 
-    .hero h1 {
+    .hero-title {
+      margin-bottom: 16px;
+
       font-size:
-        clamp(2.7rem, 6vw, 4.8rem);
+        clamp(2.5rem, 6vw, 4.4rem);
 
-      line-height: 1.02;
+      font-weight: 800;
 
-      letter-spacing: -3px;
+      line-height: 1.04;
 
-      margin-bottom: 20px;
+      letter-spacing: -2.5px;
     }
 
 
-    .hero h1 span {
+    .hero-title span {
       display: block;
 
-      background:
-        linear-gradient(
-          135deg,
-          #38bdf8,
-          #7dd3fc,
-          #e0f2fe
-        );
-
-      -webkit-background-clip: text;
-
-      -webkit-text-fill-color: transparent;
+      color: var(--cyan);
     }
 
 
-    .role {
-      min-height: 31px;
+    .typewriter {
+      min-height: 32px;
 
-      color: var(--muted);
+      margin-bottom: 18px;
+
+      color: var(--text-muted);
 
       font-size:
-        clamp(0.95rem, 2vw, 1.2rem);
+        clamp(0.95rem, 2vw, 1.15rem);
 
       font-weight: 600;
 
-      margin-bottom: 22px;
+      letter-spacing: 0.3px;
     }
 
 
@@ -436,11 +528,11 @@
 
       height: 1.1em;
 
-      background: var(--blue);
-
       margin-left: 4px;
 
       vertical-align: -2px;
+
+      background: var(--cyan);
 
       animation:
         blink 0.8s infinite;
@@ -454,12 +546,12 @@
     }
 
 
-    .hero-description {
-      max-width: 680px;
+    .hero-summary {
+      max-width: 650px;
 
-      color: var(--muted);
+      color: var(--text-secondary);
 
-      font-size: 0.98rem;
+      font-size: 0.95rem;
 
       line-height: 1.85;
     }
@@ -486,88 +578,128 @@
       min-height: 46px;
 
       padding:
-        0 20px;
+        0 21px;
 
       border-radius: 9px;
 
-      font-size: 0.83rem;
+      font-size: 0.84rem;
 
       font-weight: 700;
 
       transition:
-        0.25s ease;
+        transform var(--transition),
+        background var(--transition),
+        border-color var(--transition);
+    }
+
+
+    .btn:hover {
+      transform: translateY(-2px);
     }
 
 
     .btn-primary {
-      background: var(--blue);
+      background: var(--cyan);
 
       color: #061018;
+
+      box-shadow:
+        0 8px 25px rgba(56, 189, 248, 0.12);
     }
 
 
     .btn-primary:hover {
-      background: var(--blue-soft);
-
-      transform: translateY(-2px);
+      background: var(--cyan-light);
     }
 
 
-    .btn-outline {
+    .btn-secondary {
       border:
-        1px solid rgba(255,255,255,0.16);
+        1px solid rgba(255, 255, 255, 0.16);
+
+      background:
+        rgba(255, 255, 255, 0.035);
 
       color: white;
-
-      background:
-        rgba(255,255,255,0.03);
     }
 
 
-    .btn-outline:hover {
+    .btn-secondary:hover {
       background:
-        rgba(255,255,255,0.08);
+        rgba(255, 255, 255, 0.08);
 
-      transform: translateY(-2px);
+      border-color:
+        rgba(255, 255, 255, 0.25);
     }
 
 
     /* =========================================================
-       PROFILE
+       PROFILE IMAGE
     ========================================================= */
 
-    .profile-area {
+    .hero-image {
       display: flex;
 
       justify-content: center;
     }
 
 
-    .profile-card {
+    .profile-frame {
       position: relative;
 
-      width: min(100%, 340px);
+      width: min(100%, 330px);
 
       padding: 10px;
+
+      border-radius: 23px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(56, 189, 248, 0.22),
+          rgba(255, 255, 255, 0.035)
+        );
+
+      border:
+        1px solid rgba(56, 189, 248, 0.18);
+
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.48);
+    }
+
+
+    .profile-frame::before {
+      content: "";
+
+      position: absolute;
+
+      inset: -1px;
 
       border-radius: 24px;
 
       background:
         linear-gradient(
-          145deg,
-          rgba(56,189,248,0.25),
-          rgba(255,255,255,0.04)
+          135deg,
+          rgba(56, 189, 248, 0.35),
+          transparent 40%
         );
 
-      border:
-        1px solid rgba(56,189,248,0.18);
+      opacity: 0.5;
 
-      box-shadow:
-        0 30px 80px rgba(0,0,0,0.5);
+      pointer-events: none;
     }
 
 
-    .profile-card img {
+    .profile-image-wrapper {
+      position: relative;
+
+      overflow: hidden;
+
+      border-radius: 15px;
+    }
+
+
+    .profile-image {
       display: block;
 
       width: 100%;
@@ -576,18 +708,16 @@
 
       object-fit: cover;
 
-      border-radius: 17px;
+      object-position: center;
 
-      border:
-        1px solid rgba(255,255,255,0.08);
+      border-radius: 15px;
     }
 
 
-    .profile-badge {
+    .profile-tag {
       position: absolute;
 
       left: 50%;
-
       bottom: -17px;
 
       transform: translateX(-50%);
@@ -595,72 +725,25 @@
       white-space: nowrap;
 
       padding:
-        8px 17px;
+        8px 16px;
+
+      border:
+        1px solid rgba(56, 189, 248, 0.28);
 
       border-radius: 999px;
 
       background: #0d1117;
 
-      border:
-        1px solid rgba(56,189,248,0.3);
+      color: var(--cyan);
 
-      color: var(--blue);
-
-      font-size: 0.7rem;
+      font-size: 0.67rem;
 
       font-weight: 700;
 
       letter-spacing: 1px;
 
       box-shadow:
-        0 10px 30px rgba(0,0,0,0.5);
-    }
-
-
-    /* =========================================================
-       QUICK STATS
-    ========================================================= */
-
-    .stats {
-      display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 16px;
-
-      margin-top: 70px;
-    }
-
-
-    .stat {
-      padding: 20px;
-
-      text-align: center;
-
-      border:
-        1px solid var(--border);
-
-      border-radius: 14px;
-
-      background:
-        rgba(255,255,255,0.025);
-    }
-
-
-    .stat strong {
-      display: block;
-
-      font-size: 1.45rem;
-
-      color: white;
-    }
-
-
-    .stat span {
-      color: var(--muted);
-
-      font-size: 0.72rem;
+        0 10px 30px rgba(0, 0, 0, 0.55);
     }
 
 
@@ -678,61 +761,37 @@
     }
 
 
-    .skill {
-      padding: 25px;
+    .skill-card {
+      padding: 26px;
     }
 
 
     .skill-number {
-      color: var(--blue);
+      margin-bottom: 18px;
 
-      font-size: 0.72rem;
+      color: var(--cyan);
+
+      font-size: 0.68rem;
 
       font-weight: 700;
 
-      margin-bottom: 18px;
+      letter-spacing: 1.5px;
     }
 
 
-    .skill h3 {
+    .skill-card h3 {
+      margin-bottom: 12px;
+
       font-size: 1rem;
-
-      margin-bottom: 10px;
     }
 
 
-    .skill p {
-      color: var(--muted);
+    .skill-card p {
+      color: var(--text-muted);
 
-      font-size: 0.82rem;
+      font-size: 0.81rem;
 
       line-height: 1.75;
-    }
-
-
-    .skill-tags {
-      display: flex;
-
-      flex-wrap: wrap;
-
-      gap: 7px;
-
-      margin-top: 17px;
-    }
-
-
-    .skill-tags span {
-      padding:
-        5px 9px;
-
-      border-radius: 6px;
-
-      background:
-        rgba(255,255,255,0.05);
-
-      color: #cbd5e1;
-
-      font-size: 0.68rem;
     }
 
 
@@ -741,11 +800,11 @@
     ========================================================= */
 
     .timeline {
+      position: relative;
+
       max-width: 900px;
 
       margin: auto;
-
-      position: relative;
     }
 
 
@@ -754,33 +813,31 @@
 
       position: absolute;
 
-      left: 8px;
-
       top: 10px;
-
       bottom: 10px;
+      left: 8px;
 
       width: 1px;
 
       background:
         linear-gradient(
           to bottom,
-          var(--blue),
-          rgba(56,189,248,0.05)
+          var(--cyan),
+          rgba(56, 189, 248, 0.04)
         );
     }
 
 
-    .experience {
+    .timeline-item {
       position: relative;
 
       padding-left: 42px;
 
-      margin-bottom: 25px;
+      margin-bottom: 24px;
     }
 
 
-    .experience:last-child {
+    .timeline-item:last-child {
       margin-bottom: 0;
     }
 
@@ -788,35 +845,33 @@
     .timeline-dot {
       position: absolute;
 
+      top: 28px;
       left: 1px;
 
-      top: 27px;
-
       width: 15px;
-
       height: 15px;
+
+      border:
+        3px solid var(--cyan);
 
       border-radius: 50%;
 
       background: var(--bg);
 
-      border:
-        3px solid var(--blue);
-
       box-shadow:
-        0 0 15px rgba(56,189,248,0.45);
+        0 0 14px rgba(56, 189, 248, 0.45);
     }
 
 
-    .experience-card {
+    .timeline-card {
       padding: 27px;
     }
 
 
-    .experience-date {
-      color: var(--blue);
+    .timeline-date {
+      color: var(--cyan);
 
-      font-size: 0.72rem;
+      font-size: 0.73rem;
 
       font-weight: 700;
 
@@ -824,48 +879,47 @@
     }
 
 
-    .experience h3 {
+    .timeline-card h3 {
+      margin-top: 6px;
+
       font-size: 1.08rem;
-
-      margin-top: 7px;
     }
 
 
-    .company {
-      color: var(--muted);
+    .timeline-company {
+      margin:
+        4px 0 15px;
 
-      font-size: 0.8rem;
-
-      margin-top: 3px;
-
-      margin-bottom: 16px;
-    }
-
-
-    .experience ul {
-      padding-left: 18px;
-
-      color: #cbd5e1;
+      color: var(--text-muted);
 
       font-size: 0.82rem;
     }
 
 
-    .experience li {
+    .timeline-card ul {
+      padding-left: 19px;
+
+      color: var(--text-secondary);
+
+      font-size: 0.82rem;
+    }
+
+
+    .timeline-card li {
       margin-bottom: 8px;
     }
 
 
-    .experience li:last-child {
+    .timeline-card li:last-child {
       margin-bottom: 0;
     }
 
 
     /* =========================================================
-       ACHIEVEMENTS
+       AWARDS
     ========================================================= */
 
-    .achievements {
+    .awards-grid {
       display: grid;
 
       grid-template-columns:
@@ -875,33 +929,33 @@
     }
 
 
-    .achievement {
+    .award-card {
       padding: 28px;
 
       text-align: center;
     }
 
 
-    .achievement-icon {
+    .award-icon {
+      margin-bottom: 15px;
+
       font-size: 2rem;
-
-      margin-bottom: 14px;
     }
 
 
-    .achievement h3 {
-      font-size: 0.95rem;
-
+    .award-card h3 {
       margin-bottom: 8px;
+
+      font-size: 0.95rem;
     }
 
 
-    .achievement p {
-      color: var(--muted);
+    .award-card p {
+      color: var(--text-muted);
 
       font-size: 0.78rem;
 
-      line-height: 1.7;
+      line-height: 1.65;
     }
 
 
@@ -909,75 +963,51 @@
        CONTACT
     ========================================================= */
 
-    .contact {
-      max-width: 760px;
+    .contact-card {
+      max-width: 650px;
 
       margin: auto;
 
-      padding: 45px;
+      padding: 40px;
 
       text-align: center;
     }
 
 
-    .contact h2 {
-      font-size: 2rem;
-
+    .contact-card h2 {
       margin-bottom: 10px;
+
+      font-size: 1.9rem;
     }
 
 
-    .contact > p {
-      color: var(--muted);
+    .contact-card > p {
+      color: var(--text-muted);
 
       font-size: 0.85rem;
-
-      max-width: 550px;
-
-      margin: auto;
     }
 
 
-    .contact-links {
+    .contact-details {
       display: flex;
 
-      justify-content: center;
+      flex-direction: column;
 
-      flex-wrap: wrap;
+      gap: 8px;
 
-      gap: 12px;
-
-      margin-top: 28px;
+      margin-top: 25px;
     }
 
 
-    .contact-link {
-      padding:
-        10px 16px;
+    .contact-details a {
+      color: var(--cyan);
 
-      border-radius: 9px;
-
-      border:
-        1px solid var(--border);
-
-      background:
-        rgba(255,255,255,0.035);
-
-      color: #cbd5e1;
-
-      font-size: 0.78rem;
-
-      transition: 0.25s ease;
+      font-size: 0.87rem;
     }
 
 
-    .contact-link:hover {
-      color: white;
-
-      border-color:
-        rgba(56,189,248,0.3);
-
-      transform: translateY(-2px);
+    .contact-details a:hover {
+      text-decoration: underline;
     }
 
 
@@ -986,28 +1016,28 @@
     ========================================================= */
 
     footer {
-      border-top:
-        1px solid rgba(255,255,255,0.06);
-
       padding:
-        25px;
+        25px 20px;
 
-      text-align: center;
+      border-top:
+        1px solid rgba(255, 255, 255, 0.05);
 
       color: #64748b;
 
-      font-size: 0.72rem;
+      text-align: center;
+
+      font-size: 0.75rem;
     }
 
 
     /* =========================================================
-       ANIMATION
+       SCROLL REVEAL
     ========================================================= */
 
     .reveal {
       opacity: 0;
 
-      transform: translateY(22px);
+      transform: translateY(20px);
 
       transition:
         opacity 0.7s ease,
@@ -1015,7 +1045,7 @@
     }
 
 
-    .reveal.show {
+    .reveal.visible {
       opacity: 1;
 
       transform: translateY(0);
@@ -1041,12 +1071,6 @@
           repeat(2, 1fr);
       }
 
-
-      .achievements {
-        grid-template-columns:
-          repeat(2, 1fr);
-      }
-
     }
 
 
@@ -1058,47 +1082,49 @@
 
       .container {
         width:
-          min(100% - 36px, var(--max));
+          min(100% - 36px, var(--max-width));
       }
 
 
-      .nav-inner {
-        height: 68px;
+      .navbar-inner {
+        min-height: 68px;
 
-        padding:
-          0 18px;
+        width:
+          calc(100% - 36px);
       }
 
 
-      .menu-btn {
+      .menu-toggle {
         display: block;
       }
 
 
       .nav-links {
-        display: none;
-
         position: absolute;
 
         top: 68px;
 
         left: 18px;
-
         right: 18px;
 
-        padding: 10px;
+        display: none;
 
         flex-direction: column;
 
         gap: 2px;
 
-        background:
-          rgba(13,17,23,0.98);
+        padding: 10px;
 
         border:
           1px solid var(--border);
 
         border-radius: 12px;
+
+        background:
+          rgba(13, 15, 18, 0.97);
+
+        box-shadow:
+          0 20px 50px rgba(0, 0, 0, 0.45);
       }
 
 
@@ -1114,38 +1140,40 @@
       }
 
 
-      .nav-contact {
+      .nav-cta {
         text-align: center;
       }
 
 
       .hero {
+        min-height: auto;
+
         padding:
-          115px 0 60px;
+          115px 0 70px;
       }
 
 
       .hero-grid {
         grid-template-columns: 1fr;
 
-        text-align: center;
-
         gap: 50px;
+
+        text-align: center;
       }
 
 
-      .profile-area {
+      .hero-image {
         order: -1;
       }
 
 
-      .profile-card {
+      .profile-frame {
         width:
-          min(75vw, 290px);
+          min(72vw, 290px);
       }
 
 
-      .hero-description {
+      .hero-summary {
         margin: auto;
       }
 
@@ -1155,28 +1183,19 @@
       }
 
 
-      .stats {
-        margin-top: 50px;
-      }
-
-
-      .skills-grid {
-        grid-template-columns: 1fr;
-      }
-
-
-      .achievements {
-        grid-template-columns: 1fr;
-      }
-
-
       .section {
         padding:
           75px 0;
       }
 
 
-      .experience {
+      .skills-grid,
+      .awards-grid {
+        grid-template-columns: 1fr;
+      }
+
+
+      .timeline-item {
         padding-left: 30px;
       }
 
@@ -1191,8 +1210,9 @@
       }
 
 
-      .contact {
-        padding: 32px 20px;
+      .contact-card {
+        padding:
+          30px 20px;
       }
 
     }
@@ -1204,10 +1224,10 @@
 
     @media (max-width: 450px) {
 
-      .hero h1 {
-        font-size: 2.55rem;
+      .hero-title {
+        font-size: 2.5rem;
 
-        letter-spacing: -2px;
+        letter-spacing: -1.8px;
       }
 
 
@@ -1221,29 +1241,8 @@
       }
 
 
-      .stats {
-        gap: 8px;
-      }
-
-
-      .stat {
-        padding:
-          15px 8px;
-      }
-
-
-      .stat strong {
-        font-size: 1.15rem;
-      }
-
-
-      .stat span {
-        font-size: 0.62rem;
-      }
-
-
-      .contact-links {
-        flex-direction: column;
+      .profile-frame {
+        width: 72vw;
       }
 
     }
@@ -1283,6 +1282,13 @@
 
 <body>
 
+  <a
+    class="skip-link"
+    href="#main-content"
+  >
+    Skip to content
+  </a>
+
 
   <!-- =======================================================
        NAVIGATION
@@ -1290,21 +1296,23 @@
 
   <header class="navbar">
 
-    <div class="nav-inner">
+    <div class="navbar-inner">
 
       <a
         href="#about"
         class="logo"
       >
-        Pranesh<span>.</span>
+        Pranesh <span>Tambe</span>
       </a>
 
 
       <button
-        class="menu-btn"
-        id="menuBtn"
-        aria-label="Open navigation"
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Open navigation menu"
         aria-expanded="false"
+        aria-controls="navLinks"
       >
         ☰
       </button>
@@ -1330,13 +1338,13 @@
           </li>
 
           <li>
-            <a href="#achievements">Achievements</a>
+            <a href="#awards">Awards</a>
           </li>
 
           <li>
             <a
               href="#contact"
-              class="nav-contact"
+              class="nav-cta"
             >
               Contact
             </a>
@@ -1351,7 +1359,11 @@
   </header>
 
 
-  <main>
+  <!-- =======================================================
+       MAIN
+  ======================================================== -->
+
+  <main id="main-content">
 
 
     <!-- =====================================================
@@ -1359,8 +1371,8 @@
     ====================================================== -->
 
     <section
-      class="hero"
       id="about"
+      class="hero"
     >
 
       <div class="container hero-grid">
@@ -1368,40 +1380,44 @@
 
         <div class="hero-content reveal">
 
-          <div class="availability">
+          <div class="status-badge">
 
             <span class="status-dot"></span>
 
-            Open to Opportunities
+            🟢 Open to Opportunities
 
           </div>
 
 
-          <h1>
+          <h1 class="hero-title">
 
-            Hi, I'm
+            HI, I'M
 
-            <span>Pranesh Tambe</span>
+            <span>PRANESH TAMBE</span>
 
           </h1>
 
 
-          <div class="role">
+          <div
+            class="typewriter"
+            aria-live="polite"
+          >
 
-            <span id="typing"></span>
+            <span id="dynamicTitle"></span>
 
-            <span class="cursor"></span>
+            <span
+              class="cursor"
+              aria-hidden="true"
+            ></span>
 
           </div>
 
 
-          <p class="hero-description">
+          <p class="hero-summary">
 
-            Detail-oriented professional with experience across
-            Quality Assurance, Business Analysis, process improvement
-            and data-driven reporting. I focus on understanding
-            processes, identifying gaps and turning data into
-            actionable insights.
+            Detail-oriented professional with 3+ years of
+            experience spanning quality assurance, requirement
+            gathering, process documentation, and data analytics.
 
           </p>
 
@@ -1412,7 +1428,7 @@
               href="#contact"
               class="btn btn-primary"
             >
-              Let's Connect →
+              Get in Touch →
             </a>
 
 
@@ -1420,63 +1436,32 @@
               href="https://www.linkedin.com/in/praneshtambe1998"
               target="_blank"
               rel="noopener noreferrer"
-              class="btn btn-outline"
+              class="btn btn-secondary"
             >
-              LinkedIn
+              LinkedIn Profile
             </a>
-
-          </div>
-
-
-          <div class="stats">
-
-            <div class="stat">
-
-              <strong>3+</strong>
-
-              <span>
-                Years Experience
-              </span>
-
-            </div>
-
-
-            <div class="stat">
-
-              <strong>QA</strong>
-
-              <span>
-                Quality & Audit
-              </span>
-
-            </div>
-
-
-            <div class="stat">
-
-              <strong>SQL</strong>
-
-              <span>
-                Data & Analytics
-              </span>
-
-            </div>
 
           </div>
 
         </div>
 
 
-        <div class="profile-area reveal">
+        <div class="hero-image reveal">
 
-          <div class="profile-card">
+          <div class="profile-frame">
 
-            <img
-              src="profile.jpg"
-              alt="Pranesh Tambe professional profile photo"
-            >
+            <div class="profile-image-wrapper">
 
-            <div class="profile-badge">
+              <img
+                src="profile.jpg"
+                alt="Professional profile photo of Pranesh Tambe"
+                class="profile-image"
+              >
+
+            </div>
+
+
+            <div class="profile-tag">
               BUSINESS • QUALITY • ANALYTICS
             </div>
 
@@ -1494,24 +1479,24 @@
     ====================================================== -->
 
     <section
-      class="section"
       id="skills"
+      class="section"
     >
 
       <div class="container">
 
 
-        <div class="section-heading reveal">
+        <div class="section-header reveal">
 
-          <div class="eyebrow">
+          <div class="section-label">
             Expertise
           </div>
 
-          <h2>
-            What I Work With
+          <h2 class="section-title">
+            Core Skills & Expertise
           </h2>
 
-          <p>
+          <p class="section-description">
             A combination of analytical, quality, process and
             technical capabilities developed through professional work.
           </p>
@@ -1522,10 +1507,10 @@
         <div class="skills-grid">
 
 
-          <article class="glass skill reveal">
+          <article class="glass-card skill-card reveal">
 
             <div class="skill-number">
-              01 / BUSINESS
+              01 / PROCESS
             </div>
 
             <h3>
@@ -1533,101 +1518,64 @@
             </h3>
 
             <p>
-              Understanding requirements, documenting processes
-              and translating business needs into structured
-              workflows and SOPs.
+              Gathering requirements, translating them into SOPs,
+              process notes, workflow documentation, and
+              requirement logs.
             </p>
-
-            <div class="skill-tags">
-
-              <span>Requirements</span>
-              <span>SOP</span>
-              <span>Process Mapping</span>
-              <span>Documentation</span>
-
-            </div>
 
           </article>
 
 
-          <article class="glass skill reveal">
+          <article class="glass-card skill-card reveal">
 
             <div class="skill-number">
               02 / DATA
             </div>
 
             <h3>
-              Data & Dashboards
+              Data Analytics & Dashboards
             </h3>
 
             <p>
-              Data validation, trend analysis and performance
-              reporting with dashboards and analytical workflows.
+              SQL, JavaScript/HTML dashboards, Google Sheets,
+              data validation, trend tracking and performance analysis.
             </p>
-
-            <div class="skill-tags">
-
-              <span>SQL</span>
-              <span>Excel</span>
-              <span>Google Sheets</span>
-              <span>JavaScript</span>
-
-            </div>
 
           </article>
 
 
-          <article class="glass skill reveal">
+          <article class="glass-card skill-card reveal">
 
             <div class="skill-number">
               03 / QUALITY
             </div>
 
             <h3>
-              Quality & Audit
+              Audit, Risk & Quality
             </h3>
 
             <p>
-              Quality auditing, RCA, exception identification,
-              compliance checks and risk-based quality analysis.
+              Root Cause Analysis (RCA), exception identification,
+              risk-based sampling, and compliance auditing.
             </p>
-
-            <div class="skill-tags">
-
-              <span>RCA</span>
-              <span>Auditing</span>
-              <span>Compliance</span>
-              <span>Quality</span>
-
-            </div>
 
           </article>
 
 
-          <article class="glass skill reveal">
+          <article class="glass-card skill-card reveal">
 
             <div class="skill-number">
               04 / LEADERSHIP
             </div>
 
             <h3>
-              Ownership & SPOC
+              Leadership & SPOC
             </h3>
 
             <p>
-              Workstream ownership, task allocation, mentoring,
-              calibrations and cross-functional stakeholder
-              collaboration.
+              Workstream management, task delegation, calibrations,
+              mentoring, and cross-functional stakeholder collaboration.
             </p>
-
-            <div class="skill-tags">
-
-              <span>SPOC</span>
-              <span>Mentoring</span>
-              <span>Calibration</span>
-              <span>Reporting</span>
-
-            </div>
 
           </article>
 
@@ -1644,26 +1592,26 @@
     ====================================================== -->
 
     <section
-      class="section"
       id="experience"
+      class="section"
     >
 
       <div class="container">
 
 
-        <div class="section-heading reveal">
+        <div class="section-header reveal">
 
-          <div class="eyebrow">
-            Experience
+          <div class="section-label">
+            Career
           </div>
 
-          <h2>
-            Professional Journey
+          <h2 class="section-title">
+            Professional Experience
           </h2>
 
-          <p>
-            Experience across engineering, operations and quality
-            assurance at Virtusa Consultancy Services.
+          <p class="section-description">
+            Experience across quality assurance, operations,
+            analysis and engineering.
           </p>
 
         </div>
@@ -1672,46 +1620,42 @@
         <div class="timeline">
 
 
-          <article class="experience">
+          <article class="timeline-item">
 
-            <div class="timeline-dot"></div>
+            <span class="timeline-dot"></span>
 
-            <div class="glass experience-card reveal">
 
-              <div class="experience-date">
-                JUNE 2025 — SEPTEMBER 2026
+            <div class="glass-card timeline-card reveal">
+
+              <div class="timeline-date">
+                JUNE 2025 – PRESENT
               </div>
 
               <h3>
                 Quality Analyst
+                (Acting Team Lead / QA SPOC)
               </h3>
 
-              <div class="company">
-                Virtusa Consultancy Services · QA SPOC / Acting Team Lead
+              <div class="timeline-company">
+                Virtusa Consultancy Services
               </div>
+
 
               <ul>
 
                 <li>
-                  Partnered with stakeholders to translate
-                  requirements into SOPs, process notes and
-                  workflow guidelines.
+                  Partner directly with stakeholders to translate
+                  requirements into SOPs and process notes.
                 </li>
 
                 <li>
-                  Performed data analysis and developed
-                  SQL/JavaScript dashboards to track quality
+                  Build SQL/JavaScript dashboards to track quality
                   metrics and performance trends.
                 </li>
 
                 <li>
-                  Conducted Root Cause Analysis on process
-                  exceptions and prepared audit documentation.
-                </li>
-
-                <li>
-                  Supported task allocation, performance tracking,
-                  calibrations and stakeholder reporting.
+                  Perform Root Cause Analysis (RCA) on process
+                  exceptions and draft supportable audit documentation.
                 </li>
 
               </ul>
@@ -1721,44 +1665,41 @@
           </article>
 
 
-          <article class="experience">
+          <article class="timeline-item">
 
-            <div class="timeline-dot"></div>
+            <span class="timeline-dot"></span>
 
-            <div class="glass experience-card reveal">
 
-              <div class="experience-date">
-                AUGUST 2023 — JUNE 2025
+            <div class="glass-card timeline-card reveal">
+
+              <div class="timeline-date">
+                AUGUST 2023 – JUNE 2025
               </div>
 
               <h3>
-                Analyst — Google Ads Curation
+                Analyst – Google Ads Curation
               </h3>
 
-              <div class="company">
+              <div class="timeline-company">
                 Virtusa Consultancy Services
               </div>
+
 
               <ul>
 
                 <li>
-                  Examined digital advertising content for
-                  relevance, quality standards and policy compliance.
+                  Examined digital ad content for relevance,
+                  quality standards and policy compliance.
                 </li>
 
                 <li>
-                  Conducted process audits and Root Cause Analysis
-                  to identify recurring quality issues.
-                </li>
-
-                <li>
-                  Provided quality feedback and supported
-                  calibration and compliance activities.
+                  Conducted process audits and Cause Analysis (RCA)
+                  to deliver strategic feedback reports.
                 </li>
 
                 <li>
                   Achieved special performance allowances for
-                  nine consecutive months.
+                  9 consecutive months.
                 </li>
 
               </ul>
@@ -1768,39 +1709,36 @@
           </article>
 
 
-          <article class="experience">
+          <article class="timeline-item">
 
-            <div class="timeline-dot"></div>
+            <span class="timeline-dot"></span>
 
-            <div class="glass experience-card reveal">
 
-              <div class="experience-date">
-                JUNE 2022 — AUGUST 2023
+            <div class="glass-card timeline-card reveal">
+
+              <div class="timeline-date">
+                JUNE 2022 – AUGUST 2023
               </div>
 
               <h3>
                 Associate Engineer
               </h3>
 
-              <div class="company">
+              <div class="timeline-company">
                 Virtusa Consultancy Services
               </div>
+
 
               <ul>
 
                 <li>
-                  Completed technical training with exposure to
-                  PL/SQL and database concepts.
+                  Completed PL/SQL training and database
+                  query optimization.
                 </li>
 
                 <li>
-                  Worked with SQL-based data processing and
-                  query optimization concepts.
-                </li>
-
-                <li>
-                  Developed automation concepts and scripts
-                  to improve internal data-processing workflows.
+                  Built automated Python scripts to streamline
+                  data processing and internal operational workflows.
                 </li>
 
               </ul>
@@ -1818,36 +1756,36 @@
 
 
     <!-- =====================================================
-         ACHIEVEMENTS
+         AWARDS
     ====================================================== -->
 
     <section
+      id="awards"
       class="section"
-      id="achievements"
     >
 
       <div class="container">
 
 
-        <div class="section-heading reveal">
+        <div class="section-header reveal">
 
-          <div class="eyebrow">
+          <div class="section-label">
             Recognition
           </div>
 
-          <h2>
-            Achievements & Certifications
+          <h2 class="section-title">
+            Recognitions & Certifications
           </h2>
 
         </div>
 
 
-        <div class="achievements">
+        <div class="awards-grid">
 
 
-          <article class="glass achievement reveal">
+          <article class="glass-card award-card reveal">
 
-            <div class="achievement-icon">
+            <div class="award-icon">
               🏆
             </div>
 
@@ -1856,16 +1794,15 @@
             </h3>
 
             <p>
-              Recognition for quality performance,
-              ownership and contribution.
+              Virtusa, 2026
             </p>
 
           </article>
 
 
-          <article class="glass achievement reveal">
+          <article class="glass-card award-card reveal">
 
-            <div class="achievement-icon">
+            <div class="award-icon">
               ⭐
             </div>
 
@@ -1874,16 +1811,15 @@
             </h3>
 
             <p>
-              Recognition for outstanding quality performance,
-              ownership and team contribution — March 2026.
+              March 2026 — Outstanding performance & ownership
             </p>
 
           </article>
 
 
-          <article class="glass achievement reveal">
+          <article class="glass-card award-card reveal">
 
-            <div class="achievement-icon">
+            <div class="award-icon">
               🎓
             </div>
 
@@ -1892,7 +1828,7 @@
             </h3>
 
             <p>
-              Professional certification completed in 2025.
+              Certified in 2025
             </p>
 
           </article>
@@ -1910,54 +1846,46 @@
     ====================================================== -->
 
     <section
-      class="section"
       id="contact"
+      class="section"
     >
 
       <div class="container">
 
-        <div class="glass contact reveal">
+        <div class="glass-card contact-card reveal">
 
-          <div class="eyebrow">
-            Contact
+          <div class="section-label">
+            Get In Touch
           </div>
 
           <h2>
-            Let's Build Something Better.
+            Let's Connect
           </h2>
 
           <p>
-            Open to opportunities in Business Analysis,
-            Quality Analysis, Process Improvement and
-            data-driven roles.
+            Interested in opportunities across Business Analysis,
+            Quality Analysis and Process Improvement.
           </p>
 
 
-          <div class="contact-links">
+          <div class="contact-details">
+
+            <span>
+              📍 Mumbai, Maharashtra
+            </span>
+
 
             <a
-              class="contact-link"
               href="mailto:pranesh.tambe98@gmail.com"
             >
-              ✉ Email Me
+              ✉ pranesh.tambe98@gmail.com
             </a>
 
 
             <a
-              class="contact-link"
-              href="https://www.linkedin.com/in/praneshtambe1998"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              LinkedIn →
-            </a>
-
-
-            <a
-              class="contact-link"
               href="tel:+917756919276"
             >
-              ☎ +91 77569 19276
+              ☎ +91 7756919276
             </a>
 
           </div>
@@ -1978,26 +1906,34 @@
 
   <footer>
 
-    © <span id="year"></span>
-    Pranesh Tambe · Business & Quality Analyst
+    <p>
+      © 2026 Pranesh Tambe.
+      Built with HTML, CSS & JavaScript.
+    </p>
 
   </footer>
 
 
+  <!-- =======================================================
+       JAVASCRIPT
+  ======================================================== -->
+
   <script>
 
     /* =======================================================
-       TYPING EFFECT
+       TYPEWRITER
     ======================================================== */
 
     const titles = [
       "QUALITY ANALYST & PROCESS SPECIALIST",
       "BUSINESS ANALYST",
-      "PROCESS IMPROVEMENT SPECIALIST"
+      "PROCESS IMPROVEMENT LEAD"
     ];
 
-    const typing =
-      document.getElementById("typing");
+
+    const dynamicTitle =
+      document.getElementById("dynamicTitle");
+
 
     let titleIndex = 0;
     let charIndex = 0;
@@ -2006,34 +1942,49 @@
 
     function typeEffect() {
 
-      const current =
+      const currentTitle =
         titles[titleIndex];
 
 
       if (!deleting) {
 
-        typing.textContent =
-          current.substring(0, charIndex + 1);
+        dynamicTitle.textContent =
+          currentTitle.substring(
+            0,
+            charIndex + 1
+          );
 
         charIndex++;
 
 
-        if (charIndex === current.length) {
+        if (
+          charIndex ===
+          currentTitle.length
+        ) {
 
           deleting = true;
 
-          setTimeout(typeEffect, 2200);
+          setTimeout(
+            typeEffect,
+            2200
+          );
 
         } else {
 
-          setTimeout(typeEffect, 70);
+          setTimeout(
+            typeEffect,
+            70
+          );
 
         }
 
       } else {
 
-        typing.textContent =
-          current.substring(0, charIndex - 1);
+        dynamicTitle.textContent =
+          currentTitle.substring(
+            0,
+            charIndex - 1
+          );
 
         charIndex--;
 
@@ -2043,13 +1994,20 @@
           deleting = false;
 
           titleIndex =
-            (titleIndex + 1) % titles.length;
+            (titleIndex + 1) %
+            titles.length;
 
-          setTimeout(typeEffect, 500);
+          setTimeout(
+            typeEffect,
+            450
+          );
 
         } else {
 
-          setTimeout(typeEffect, 35);
+          setTimeout(
+            typeEffect,
+            35
+          );
 
         }
 
@@ -2059,75 +2017,116 @@
 
 
     /* =======================================================
-       MOBILE MENU
+       MOBILE NAVIGATION
     ======================================================== */
 
-    const menuBtn =
-      document.getElementById("menuBtn");
+    const menuToggle =
+      document.getElementById("menuToggle");
+
 
     const navLinks =
       document.getElementById("navLinks");
 
 
-    menuBtn.addEventListener("click", () => {
+    menuToggle.addEventListener(
+      "click",
+      () => {
 
-      const open =
-        navLinks.classList.toggle("open");
-
-      menuBtn.setAttribute(
-        "aria-expanded",
-        open
-      );
-
-      menuBtn.textContent =
-        open ? "✕" : "☰";
-
-    });
+        const isOpen =
+          navLinks.classList.toggle("open");
 
 
-    navLinks.querySelectorAll("a").forEach(link => {
-
-      link.addEventListener("click", () => {
-
-        navLinks.classList.remove("open");
-
-        menuBtn.setAttribute(
+        menuToggle.setAttribute(
           "aria-expanded",
-          "false"
+          isOpen
         );
 
-        menuBtn.textContent = "☰";
+
+        menuToggle.setAttribute(
+          "aria-label",
+          isOpen
+            ? "Close navigation menu"
+            : "Open navigation menu"
+        );
+
+
+        menuToggle.textContent =
+          isOpen
+            ? "✕"
+            : "☰";
+
+      }
+    );
+
+
+    navLinks
+      .querySelectorAll("a")
+      .forEach(link => {
+
+        link.addEventListener(
+          "click",
+          () => {
+
+            navLinks.classList.remove(
+              "open"
+            );
+
+
+            menuToggle.setAttribute(
+              "aria-expanded",
+              "false"
+            );
+
+
+            menuToggle.setAttribute(
+              "aria-label",
+              "Open navigation menu"
+            );
+
+
+            menuToggle.textContent =
+              "☰";
+
+          }
+        );
 
       });
-
-    });
 
 
     /* =======================================================
        SCROLL REVEAL
     ======================================================== */
 
-    const reveal =
-      document.querySelectorAll(".reveal");
+    const revealElements =
+      document.querySelectorAll(
+        ".reveal"
+      );
 
 
-    const observer =
+    const revealObserver =
       new IntersectionObserver(
         entries => {
 
-          entries.forEach(entry => {
+          entries.forEach(
+            entry => {
 
-            if (entry.isIntersecting) {
+              if (
+                entry.isIntersecting
+              ) {
 
-              entry.target.classList.add("show");
+                entry.target.classList.add(
+                  "visible"
+                );
 
-              observer.unobserve(
-                entry.target
-              );
+
+                revealObserver.unobserve(
+                  entry.target
+                );
+
+              }
 
             }
-
-          });
+          );
 
         },
         {
@@ -2136,23 +2135,19 @@
       );
 
 
-    reveal.forEach(element => {
+    revealElements.forEach(
+      element => {
 
-      observer.observe(element);
+        revealObserver.observe(
+          element
+        );
 
-    });
-
-
-    /* =======================================================
-       YEAR
-    ======================================================== */
-
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
+      }
+    );
 
 
     /* =======================================================
-       START
+       START TYPEWRITER
     ======================================================== */
 
     typeEffect();
